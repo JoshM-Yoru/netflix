@@ -1,22 +1,30 @@
 package components
 
 import (
-"netflix/models"
+    "netflix/models"
 	"fmt"
 )
 
 templ Catalog(catalog []*models.MediaInfo, page, pageSize, pages int) {
-<div class="w-4/5 justify-self-center block py-4">
-    <div class="font-semibold bg-slate-950 flex rounded-lg shadow-lg">
-        <div class="p-2 min-w-24">Type</div>
-        <div class="p-2 ">Title</div>
-        <div class="p-2 ">Director(s)</div>
-        <div class="p-2 ">Coundivy</div>
-        <div class="p-2 ">Date Added</div>
-        <div class="p-2 ">Release Year</div>
-        <div class="p-2 ">Rating</div>
-        <div class="p-2 ">Duration</div>
-        <div class="p-2 ">Category</div>
+<div id="main-content" class="w-4/5 justify-self-center block py-4">
+    <div id="header" class="font-semibold sticky top-16 bg-slate-950 flex justify-between rounded-lg shadow-lg">
+        <div class="p-2 w-12">Type</div>
+        <div class="p-2 w-24">Title</div>
+        <div class="p-2 w-24">Director(s)</div>
+        <div class="p-2 w-14">Country</div>
+        <div class="p-2 w-14">Date Added</div>
+        <div class="p-2 w-10">Release Year</div>
+        <div class="p-2 w-10">Rating</div>
+        <div class="p-2 w-18">Duration</div>
+        <div class="p-2 w-24">Category</div>
+        <div class="flex justify-around w-48 font-semibold py-2 px-4">
+        <button
+            hx-get="/new-item"
+            hx-target="#header"
+            hx-swap="outerHTML"
+            class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Add New</button>
+        </div>
+        <div class="px-2"></div>
     </div>
     <div class="pt-2"></div>
     for i, info := range catalog {
@@ -24,9 +32,36 @@ templ Catalog(catalog []*models.MediaInfo, page, pageSize, pages int) {
             @MediaInfo(*info)
         }
     }
-    <div class="flex">
-        for i := 1; i <= pages; i++ {
-            <div class="rounded-lg bg-slate-950">{fmt.Sprintf("%d", i)}</div>
+    <div class="flex justify-end text-xl">
+        <div class="p-2">Pages:</div>
+        <div class="pr-8"></div>
+        if page > 1 {
+            <button hx-get={ fmt.Sprintf("/catalog?page=%d", page - 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">&lt</button>
+        <div class="pr-8"></div>
+        }
+        if page > 2 { 
+            <button hx-get="/catalog?page=1" hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">1</button>
+            <div class="pr-8"></div>
+            <div>...</div>
+            <div class="pr-8"></div>
+         }
+        for i := page; i <= pages; i++ {
+            if i == page { 
+             <button hx-get={ fmt.Sprintf("/catalog?page=%d", page) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-700">{fmt.Sprintf("%d", page)}</button>
+             <div class="pr-8"></div>
+            }
+            if i + 1 < page + 4  && i + 1 < pages {
+                <button hx-get={ fmt.Sprintf("/catalog?page=%d", i + 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{fmt.Sprintf("%d", i + 1)}</button>
+                <div class="pr-8"></div>
+            }
+            if i == pages && page != pages {
+                <div>...</div>
+                <div class="pr-8"></div>
+                <button hx-get={ fmt.Sprintf("/catalog?page=%d", i) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{fmt.Sprintf("%d", i)}</button>
+        <div class="pr-8"></div>
+            <button hx-get={ fmt.Sprintf("/catalog?page=%d", page + 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">&gt</button>
+        <div class="pr-8"></div>
+            }
         }
     </div>
 </div>

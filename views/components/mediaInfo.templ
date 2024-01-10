@@ -6,23 +6,28 @@ import (
 )
 
 templ MediaInfo(info models.MediaInfo) {
-<div class="flex bg-slate-950 rounded-lg shadow-lg" id={ fmt.Sprintf("media-%d", info.ID) }>
-    <div class="p-2 min-w-18">{ info.Type }</div>
-    <div class="p-2 ">{ info.Title }</div>
-    <div class="p-2 ">{ info.Director }</div>
-    <div class="p-2 ">{ info.Country }</div>
-    <div class="p-2 ">{ info.DateAdded.Format("2006-01-02") }</div>
-    <div class="p-2 ">{ fmt.Sprintf("%d", info.ReleaseYear) }</div>
-    <div class="p-2 ">{ info.Rating }</div>
-    <div class="p-2 ">{ info.Duration }</div>
-    <div class="p-2 ">{ info.Category }</div>
-    <div class="px-2"></div>
-    <button hx-get={ fmt.Sprintf("update-item?id=%d", info.ID) } hx-target={ fmt.Sprintf("#media-%d", info.ID) }
-        hx-swap="outerHTML"
-        class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Edit</button>
-    <div class="px-2"></div>
-    <button
-        class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Delete</button>
+<div class="flex justify-between bg-slate-950 rounded-lg shadow-lg" id={ fmt.Sprintf("media-%d", info.ID) }>
+    <div class="p-2 text-wrap w-12">{ info.Type }</div>
+    <div class="p-2 text-wrap w-24">{ info.Title }</div>
+    <div class="p-2 text-wrap w-24">{ info.Director }</div>
+    <div class="p-2 text-wrap w-14">{ info.Country }</div>
+    <div class="p-2 text-wrap w-14">{ info.DateAdded.Format("2006-01-02") }</div>
+    <div class="p-2 text-wrap w-10">{ fmt.Sprintf("%d", info.ReleaseYear) }</div>
+    <div class="p-2 text-wrap w-10">{ info.Rating }</div>
+    <div class="p-2 text-wrap w-18">{ info.Duration }</div>
+    <div class="p-2 text-wrap w-24">{ info.Category }</div>
+    <div class="flex h-fit align-middle my-auto">
+        <button hx-get={ fmt.Sprintf("update-item?id=%d", info.ID) } hx-target={ fmt.Sprintf("#media-%d", info.ID) }
+            hx-swap="outerHTML"
+            class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Edit</button>
+        <div class="px-2"></div>
+        <button hx-patch={ fmt.Sprintf("catalog?id=%d", info.ID) } hx-target="#main-content" hx-swap="outerHTML"
+            class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Delete</button>
+        <div class="px-2"></div>
+        <button
+            class="h-16 align-middle bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Favorite</button>
+        <div class="px-2"></div>
+    </div>
 </div>
 <div class="pt-2"></div>
 }

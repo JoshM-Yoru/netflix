@@ -15,6 +15,8 @@ type Storage interface {
 	GetMediaEntryById(int) (*models.MediaInfo, error)
 	GetWatchListEntryById(int) (*models.WatchListInfo, error)
     UpdateMediaInfo(*models.MediaInfo) error
+    CreateMediaEntry(*models.MediaInfo) error
+    DisableMediaEntry(int) error
 }
 
 type PostgresStore struct {
@@ -191,10 +193,10 @@ func (s *PostgresStore) CreateWatchListEntry(info *models.MediaInfoWatch) error 
 	return nil
 }
 
-func (s *PostgresStore) DisableMediaEntry(showID string) error {
+func (s *PostgresStore) DisableMediaEntry(id int) error {
 	query := "update catalog set is_deleted = true where pk_id = $1"
 
-	_, err := s.db.Query(query, showID)
+	_, err := s.db.Query(query, id)
 	if err != nil {
 		return err
 	}
@@ -203,10 +205,10 @@ func (s *PostgresStore) DisableMediaEntry(showID string) error {
 }
 
 // unused
-func (s *PostgresStore) DeleteMediaEntry(showID string) error {
+func (s *PostgresStore) DeleteMediaEntry(id int) error {
 	query := "delete from catalog where show_id = $1"
 
-	_, err := s.db.Query(query, showID)
+	_, err := s.db.Query(query, id)
 	if err != nil {
 		return err
 	}
