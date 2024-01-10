@@ -1,0 +1,33 @@
+package components
+
+import (
+"netflix/models"
+	"fmt"
+)
+
+templ Catalog(catalog []*models.MediaInfo, page, pageSize, pages int) {
+<div class="w-4/5 justify-self-center block py-4">
+    <div class="font-semibold bg-slate-950 flex rounded-lg shadow-lg">
+        <div class="p-2 min-w-24">Type</div>
+        <div class="p-2 ">Title</div>
+        <div class="p-2 ">Director(s)</div>
+        <div class="p-2 ">Coundivy</div>
+        <div class="p-2 ">Date Added</div>
+        <div class="p-2 ">Release Year</div>
+        <div class="p-2 ">Rating</div>
+        <div class="p-2 ">Duration</div>
+        <div class="p-2 ">Category</div>
+    </div>
+    <div class="pt-2"></div>
+    for i, info := range catalog {
+        if i >= (page-1)*pageSize && i < page*pageSize {
+            @MediaInfo(*info)
+        }
+    }
+    <div class="flex">
+        for i := 1; i <= pages; i++ {
+            <div class="rounded-lg bg-slate-950">{fmt.Sprintf("%d", i)}</div>
+        }
+    </div>
+</div>
+}

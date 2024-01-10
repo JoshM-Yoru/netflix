@@ -1,0 +1,34 @@
+package forms
+
+import (
+"netflix/models"
+"fmt"
+)
+
+templ MediaInfoForm(info *models.MediaInfo) {
+<form class="flex bg-slate-950 rounded-lg shadow-lg" id={ fmt.Sprintf("media-%d", info.ID) }>
+    <input type="hidden" name="showID" value={ fmt.Sprintf("%d", info.ID) } />
+    <input name="type" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
+        info.Type } />
+    <input name="title" class="px-3 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
+        info.Title } />
+    <input name="director" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ info.Director } />
+    <input name="country" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ info.Country } />
+    <input name="dateAdded" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ info.DateAdded.Format("2006-01-02") } />
+    <input name="releaseYear" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ fmt.Sprintf("%d", info.ReleaseYear) } />
+    <input name="rating" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
+        info.Rating } />
+    <input name="duration" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ info.Duration } />
+    <input name="category" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+        value={ info.Category } />
+    <div class="px-2"></div>
+    <button hx-put="/catalog" hx-target={ fmt.Sprintf("#media-%d", info.ID) } type="submit" hx-swap="outerHTML"
+        class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Submit</button>
+</form>
+<div class="pt-2"></div>
+}
