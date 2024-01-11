@@ -17,6 +17,9 @@ type Storage interface {
     UpdateMediaInfo(*models.MediaInfo) error
     CreateMediaEntry(*models.MediaInfo) error
     DisableMediaEntry(int) error
+    GetWatchList() ([]*models.WatchListInfo, error)
+    CreateWatchListEntry(int) error
+    UpdateWatchList(int) error
 }
 
 type PostgresStore struct {
@@ -144,6 +147,7 @@ func (s *PostgresStore) GetWatchListEntryById(id int) (*models.WatchListInfo, er
 		return nil, err
 	}
 	defer rows.Close()
+    rows.Next()
 
 	mediaInfo, err := scanIntoWatchListInfo(rows)
 	if err != nil {
@@ -177,14 +181,14 @@ func (s *PostgresStore) CreateMediaEntry(info *models.MediaInfo) error {
 	return nil
 }
 
-func (s *PostgresStore) CreateWatchListEntry(info *models.MediaInfoWatch) error {
-	query := `insert into catalog (fk_id, watched)
+func (s *PostgresStore) CreateWatchListEntry(id int) error {
+	query := `insert into watched_media (fk_id, watched)
                 values ($1, $2)`
 
 	_, err := s.db.Query(
 		query,
-		info.ShowID,
-		info.Watched,
+		id,
+		false,
 	)
 	if err != nil {
 		return err

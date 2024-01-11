@@ -51,13 +51,13 @@ func (s *APIServer) Run() {
 	app.PUT("/catalog", s.HandleUpdateCatalogEntry)
 
 	//updates a watch list entry at the id
-	app.PUT("/watch-list/{id}", s.HandleUpdateWatchListEntry)
+	app.PUT("/watch-list", s.HandleUpdateWatchListEntry)
 
 	//used to "delete"/disable an entry from the catalog
 	app.PATCH("/catalog", s.HandleDisableCatalogEntry)
 
 	//deletes a watch list entry at id
-	app.DELETE("/watch-list/{id}", s.HandleDeleteWatchlistEntry)
+	app.DELETE("/watch-list", s.HandleDeleteWatchlistEntry)
 
 	app.Start(s.listenAddress)
 }

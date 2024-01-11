@@ -54,6 +54,9 @@ func (s *APIServer) HandleUpdateEntryForm(c echo.Context) error {
 	}
 
 	form, err := s.store.GetMediaEntryById(showId)
+	if err != nil {
+		return err
+	}
 
 	return render(c, forms.MediaInfoForm(form))
 }

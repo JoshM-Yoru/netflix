@@ -19,7 +19,7 @@ templ Base() {
             <div class="space-x-4 flex items-center">
                 <a href="/" class="text-white hover:text-gray-300">Home</a>
                 <a href="#" hx-get="/catalog?page=1" hx-target="#main-content" hx-swap="outerHTML" class="text-white hover:text-gray-300">Catalog</a>
-                <a href="#" hx-get="/watch-list" hx-target="#main-content" hx-swap="outerHTML" class="text-white hover:text-gray-300">WatchList</a>
+                <a href="#" hx-get="/watch-list?page=1" hx-target="#main-content" hx-swap="outerHTML" class="text-white hover:text-gray-300">WatchList</a>
                 <input 
                     type="text" 
                     name="search"

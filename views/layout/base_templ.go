@@ -77,7 +77,7 @@ func Base() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a href=\"#\" hx-get=\"/watch-list\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"text-white hover:text-gray-300\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a href=\"#\" hx-get=\"/watch-list?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"text-white hover:text-gray-300\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
