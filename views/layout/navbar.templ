@@ -11,7 +11,6 @@ templ Navbar() {
 				<a
  					href="#"
  					hx-get="/catalog?page=1"
- 					hx-push-url="true"
  					hx-target="#main-content"
  					hx-swap="outerHTML"
  					class="text-white hover:text-gray-300"
@@ -19,7 +18,6 @@ templ Navbar() {
 				<a
  					href="#"
  					hx-get="/watch-list?page=1"
- 					hx-push-url="true"
  					hx-target="#main-content"
  					hx-swap="outerHTML"
  					class="text-white hover:text-gray-300"
@@ -29,7 +27,6 @@ templ Navbar() {
  					name="search"
  					id="search"
  					hx-get="/catalog-search"
- 					hx-push-url="true"
  					hx-trigger="keyup changed delay:500ms"
  					hx-target="#main-content"
  					hx-swap="outerHTML"

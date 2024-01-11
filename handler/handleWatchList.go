@@ -22,10 +22,10 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(watchList) / 20) + 1
-    if pageNum > pages {
-        return render(c, components.BadRequest())
-    }
+	pages := int(len(watchList)/20) + 1
+	if pageNum > pages {
+		return render(c, components.BadRequest())
+	}
 
 	return render(c, components.WatchList(watchList, pageNum, 20, pages))
 }
@@ -58,7 +58,7 @@ func (s *APIServer) HandleUpdateWatchList(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(watchList) / 20) + 1
+	pages := int(len(watchList)/20) + 1
 
 	return render(c, components.WatchList(watchList, 1, 20, pages))
 }
@@ -97,10 +97,10 @@ func (s *APIServer) HandleDeleteWatchlistEntry(c echo.Context) error {
 
 	watchList, err := s.store.GetWatchList()
 	if err != nil {
-        return err
+		return err
 	}
 
-	pages := int(len(watchList) / 20) + 1
+	pages := int(len(watchList)/20) + 1
 
 	return render(c, components.WatchList(watchList, 1, 20, pages))
 }

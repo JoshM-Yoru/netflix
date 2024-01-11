@@ -20,10 +20,6 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		return err
 	}
 
-	if len(c.Request().Header.Get("Hx-Current-Url")) > 0 {
-        fmt.Println(c.Request().Header.Get("Hx-Current-Url"))
-	}
-
 	catalog, err := s.store.GetFullCatalog()
 	if err != nil {
 		log.Fatal(err)
@@ -31,6 +27,7 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 
 	pages := int(len(catalog)/20) + 1
 
+    // used to make sure that a page that does not exist in the catalog can not be accessed
 	if pageNum > pages {
 		return render(c, components.BadRequest())
 	}
@@ -39,6 +36,7 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 }
 
 func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
+
 	catalog, err := s.store.SearchCatalog(c.FormValue("search"))
 	if err != nil {
 		log.Fatal(err)
@@ -80,6 +78,7 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		return err
 	}
 
+    // parses request into MediaInfo struct
 	media := models.MediaInfo{
 		Type:        c.FormValue("type"),
 		Title:       c.FormValue("title"),

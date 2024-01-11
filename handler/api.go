@@ -7,11 +7,13 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// struct holds the port number and 
 type APIServer struct {
 	listenAddress string
 	store         storage.Storage
 }
 
+// function used to fill the APIServer struct
 func NewAPIServer(listenAddress string, store storage.Storage) *APIServer {
 	return &APIServer{
 		listenAddress: listenAddress,
@@ -19,6 +21,7 @@ func NewAPIServer(listenAddress string, store storage.Storage) *APIServer {
 	}
 }
 
+// function used to run the server that includes all necessary endpoints
 func (s *APIServer) Run() {
 	app := echo.New()
     app.Static("/", "assests")
@@ -65,6 +68,7 @@ func (s *APIServer) Run() {
 	app.Start(s.listenAddress)
 }
 
+// returns html for the '/' route
 func (s *APIServer) HandleHome(c echo.Context) error {
 	return render(c, layout.Base())
 }

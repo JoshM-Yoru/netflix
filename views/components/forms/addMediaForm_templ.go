@@ -68,7 +68,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"dateAdded\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"releaseYear\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"dateAdded\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\" placeholder=\"YYYY-MM-DD\"></div><div><label for=\"releaseYear\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

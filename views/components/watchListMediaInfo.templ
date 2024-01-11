@@ -41,7 +41,7 @@ templ WatchListMediaInfo(info models.WatchListInfo) {
  				hx-delete={ fmt.Sprintf("watch-list?id=%d", info.ID) }
  				hx-target="#main-content"
  				hx-swap="outerHTML"
- 				hx-confirm="Are You Sure You Want To Delte Record?"
+ 				hx-confirm="Are You Sure You Want To Delete Record?"
  				class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
 			>Delete</button>
 			<div class="px-2"></div>
