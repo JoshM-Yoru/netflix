@@ -8,7 +8,7 @@
 
 ### Task #2 – Web Server
 
-Develop a web server to interface with the database with the following capabilities
+#### Develop a web server to interface with the database with the following capabilities
 
     - Can retrieve a list of all movies and shows in the database. [x]
         + Bonus: How might you increase performance of this operation?
@@ -18,7 +18,7 @@ Develop a web server to interface with the database with the following capabilit
  
 ### Task #3 – Web App
 
-Develop a web application to communicate with the server that includes the following features
+#### Develop a web application to communicate with the server that includes the following features
 
     - Allows John to see all movies and shows in a table format. [x]
         + Bonus: How might you add a searching capability to this feature? [x]
