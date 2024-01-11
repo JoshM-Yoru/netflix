@@ -25,9 +25,13 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 40)
+	pages := int(len(catalog) / 20) + 1
 
-	return render(c, components.Catalog(catalog, pageNum, 40, pages))
+    if pageNum > pages {
+        return render(c, components.BadRequest())
+    }
+
+	return render(c, components.Catalog(catalog, pageNum, 20, pages))
 }
 
 func (s *APIServer) HandleSearch(c echo.Context) error {
@@ -36,9 +40,9 @@ func (s *APIServer) HandleSearch(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 40)
+	pages := int(len(catalog) / 20) + 1
 
-	return render(c, components.Catalog(catalog, 1, 40, pages))
+	return render(c, components.Catalog(catalog, 1, 20, pages))
 }
 
 func (s *APIServer) HandleNewEntryForm(c echo.Context) error {
@@ -94,9 +98,9 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 40)
+	pages := int(len(catalog) / 20) + 1
 
-	return render(c, components.Catalog(catalog, 1, 40, pages))
+	return render(c, components.Catalog(catalog, 1, 20, pages))
 }
 
 func (s *APIServer) HandleUpdateCatalogEntry(c echo.Context) error {
@@ -153,6 +157,6 @@ func (s *APIServer) HandleDisableCatalogEntry(c echo.Context) error {
         return err
 	}
 
-	pages := int(len(catalog) / 40)
-	return render(c, components.Catalog(catalog, 1, 40, pages))
+	pages := int(len(catalog) / 20) + 1
+	return render(c, components.Catalog(catalog, 1, 20, pages))
 }

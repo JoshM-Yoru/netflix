@@ -23,7 +23,7 @@ func Base() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html class=\"scroll-smooth\"><head><script src=\"https://unpkg.com/htmx.org@1.9.10\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -86,7 +86,7 @@ func Base() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <input type=\"text\" name=\"search\" hx-trigger=\"keyup changed delay:500ms\" hx-get=\"/search\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" placeholder=\"Search...\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div></nav><div class=\"flex items-center justify-center\"><div id=\"main-content\"></div></div></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <input type=\"text\" name=\"search\" hx-trigger=\"keyup changed delay:500ms\" hx-get=\"/search\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" placeholder=\"Search...\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div></nav><div id=\"top\"></div><div class=\"py-4\"></div><div class=\"flex items-center justify-center\"><div id=\"main-content\"></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

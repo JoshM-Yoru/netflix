@@ -1,84 +1,119 @@
 package forms
 
 import (
-"netflix/models"
-"fmt"
+	"netflix/models"
+	"fmt"
 )
 
 templ MediaInfoForm(info *models.MediaInfo) {
-<form class="align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll" id={ fmt.Sprintf("media-%d", info.ID),
-    }>
-    <input type="hidden" name="showID" value={ fmt.Sprintf("%d", info.ID) } />
-    <div class="flex justify-around py-2">
-        <div>
-            <label for="type">Media Type:</label>
-            <br />
-            <input name="type" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
-                value={ info.Type } />
-        </div>
-        <div>
-            <label for="title">Title:</label>
-            <br />
-            <input name="title" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
-                value={ info.Title } />
-        </div>
-        <div>
-            <label for="director">Director:</label>
-            <br />
-            <input name="director"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                info.Director } />
-        </div>
-    </div>
-    <div class="flex justify-around py-2">
-        <div>
-            <label for="country">Country:</label>
-            <br />
-            <input name="country"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                info.Country } />
-        </div>
-        <div>
-            <label for="dateAdded">Date Added:</label>
-            <br />
-            <input name="dateAdded"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                info.DateAdded.Format("2006-01-02") } />
-        </div>
-        <div>
-            <label for="releaseYear">Release Year:</label>
-            <br />
-            <input name="releaseYear"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                fmt.Sprintf("%d", info.ReleaseYear) } />
-        </div>
-    </div>
-    <div class="flex justify-around py-2">
-        <div>
-            <label for="rating">Rating:</label>
-            <br />
-            <input name="rating" class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
-                value={ info.Rating } />
-        </div>
-        <div>
-            <label for="Duration">Duration:</label>
-            <br />
-            <input name="duration"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                info.Duration } />
-        </div>
-        <div>
-            <label for="category">Category:</label>
-            <br />
-            <input name="category"
-                class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500" value={
-                info.Category } />
-        </div>
-    </div>
-    <div class="px-2"></div>
-    <div class="flex justify-around">
-        <button hx-put="/catalog" hx-target={ fmt.Sprintf("#media-%d", info.ID) } type="submit" hx-swap="outerHTML"
-            class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red">Submit</button>
-    </div>
-</form>
+	<form
+ 		class="align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll"
+ 		id={ fmt.Sprintf("media-%d", info.ID),
+    }
+	>
+		<input type="hidden" name="showID" value={ fmt.Sprintf("%d", info.ID) }/>
+		<div class="flex justify-around py-2">
+			<div>
+				<label for="type">Media Type:</label>
+				<br/>
+				<input
+ 					name="type"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ info.Type }
+				/>
+			</div>
+			<div>
+				<label for="title">Title:</label>
+				<br/>
+				<input
+ 					name="title"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ info.Title }
+				/>
+			</div>
+			<div>
+				<label for="director">Director:</label>
+				<br/>
+				<input
+ 					name="director"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                info.Director }
+				/>
+			</div>
+		</div>
+		<div class="flex justify-around py-2">
+			<div>
+				<label for="country">Country:</label>
+				<br/>
+				<input
+ 					name="country"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                info.Country }
+				/>
+			</div>
+			<div>
+				<label for="dateAdded">Date Added:</label>
+				<br/>
+				<input
+ 					name="dateAdded"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                info.DateAdded.Format("2006-01-02") }
+				/>
+			</div>
+			<div>
+				<label for="releaseYear">Release Year:</label>
+				<br/>
+				<input
+ 					name="releaseYear"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                fmt.Sprintf("%d", info.ReleaseYear) }
+				/>
+			</div>
+		</div>
+		<div class="flex justify-around py-2">
+			<div>
+				<label for="rating">Rating:</label>
+				<br/>
+				<input
+ 					name="rating"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ info.Rating }
+				/>
+			</div>
+			<div>
+				<label for="Duration">Duration:</label>
+				<br/>
+				<input
+ 					name="duration"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                info.Duration }
+				/>
+			</div>
+			<div>
+				<label for="category">Category:</label>
+				<br/>
+				<input
+ 					name="category"
+ 					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
+ 					value={ 
+                info.Category }
+				/>
+			</div>
+		</div>
+		<div class="px-2"></div>
+		<div class="flex justify-around">
+			<button
+ 				hx-put="/catalog"
+ 				hx-target={ fmt.Sprintf("#media-%d", info.ID) }
+ 				type="submit"
+ 				hx-swap="outerHTML"
+ 				class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
+			>Submit</button>
+		</div>
+	</form>
 }

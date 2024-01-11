@@ -20,6 +20,7 @@ type Storage interface {
     GetWatchList() ([]*models.WatchListInfo, error)
     CreateWatchListEntry(int) error
     UpdateWatchList(int) error
+    DeleteWatchListEntry(int) error
 }
 
 type PostgresStore struct {
@@ -105,7 +106,7 @@ func (s *PostgresStore) SearchCatalog(title string) ([]*models.MediaInfo, error)
 
 func (s *PostgresStore) GetWatchList() ([]*models.WatchListInfo, error) {
 
-	rows, err := s.db.Query("select c.type, c.title, c.director, c.country, c.date_added, c.release_year, c.rating, c.duration, c.listed_in, wm.pk_id, wm.watched from catalog c right join watched_media wm on c.pk_id = wm.fk_id where is_deleted = false")
+	rows, err := s.db.Query("select c.type, c.title, c.director, c.country, c.date_added, c.release_year, c.rating, c.duration, c.listed_in, wm.pk_id, wm.watched from catalog c right join watched_media wm on c.pk_id = wm.fk_id")
 	if err != nil {
 		return nil, err
 	}
