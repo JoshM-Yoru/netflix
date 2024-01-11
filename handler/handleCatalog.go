@@ -20,27 +20,31 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		return err
 	}
 
+	if len(c.Request().Header.Get("Hx-Current-Url")) > 0 {
+        fmt.Println(c.Request().Header.Get("Hx-Current-Url"))
+	}
+
 	catalog, err := s.store.GetFullCatalog()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 20) + 1
+	pages := int(len(catalog)/20) + 1
 
-    if pageNum > pages {
-        return render(c, components.BadRequest())
-    }
+	if pageNum > pages {
+		return render(c, components.BadRequest())
+	}
 
 	return render(c, components.Catalog(catalog, pageNum, 20, pages))
 }
 
-func (s *APIServer) HandleSearch(c echo.Context) error {
+func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
 	catalog, err := s.store.SearchCatalog(c.FormValue("search"))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 20) + 1
+	pages := int(len(catalog)/20) + 1
 
 	return render(c, components.Catalog(catalog, 1, 20, pages))
 }
@@ -98,7 +102,7 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog) / 20) + 1
+	pages := int(len(catalog)/20) + 1
 
 	return render(c, components.Catalog(catalog, 1, 20, pages))
 }
@@ -141,22 +145,22 @@ func (s *APIServer) HandleUpdateCatalogEntry(c echo.Context) error {
 }
 
 func (s *APIServer) HandleDisableCatalogEntry(c echo.Context) error {
-    id := c.QueryParam("id")
-    numID, err := strconv.Atoi(id)
-    if err != nil {
-        return err
-    }
+	id := c.QueryParam("id")
+	numID, err := strconv.Atoi(id)
+	if err != nil {
+		return err
+	}
 
-    err = s.store.DisableMediaEntry(numID)
-    if err != nil {
-        return err
-    }
+	err = s.store.DisableMediaEntry(numID)
+	if err != nil {
+		return err
+	}
 
 	catalog, err := s.store.GetFullCatalog()
 	if err != nil {
-        return err
+		return err
 	}
 
-	pages := int(len(catalog) / 20) + 1
+	pages := int(len(catalog)/20) + 1
 	return render(c, components.Catalog(catalog, 1, 20, pages))
 }

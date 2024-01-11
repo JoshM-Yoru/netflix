@@ -30,6 +30,17 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
 	return render(c, components.WatchList(watchList, pageNum, 20, pages))
 }
 
+func (s *APIServer) HandleWatchListSearch(c echo.Context) error {
+	watchList, err := s.store.SearchWatchList(c.FormValue("search"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	pages := int(len(watchList)/20) + 1
+
+	return render(c, components.WatchList(watchList, 1, 20, pages))
+}
+
 func (s *APIServer) HandleUpdateWatchList(c echo.Context) error {
 	id := c.QueryParam("id")
 	idNum, err := strconv.Atoi(id)

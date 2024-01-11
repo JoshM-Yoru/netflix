@@ -10,6 +10,8 @@ import "context"
 import "io"
 import "bytes"
 
+import "netflix/views/components"
+
 func Base() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
@@ -59,34 +61,53 @@ func Base() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script></head><body class=\"bg-slate-900 text-white\"><nav class=\"bg-slate-950 p-4 sticky top-0\"><div class=\"container mx-auto flex justify-between items-center\"><a href=\"/\" class=\"text-white text-lg font-semibold\"><img src=\"Netflix.png\" class=\"max-h-10\"></a><div class=\"space-x-4 flex items-center\"><a href=\"/\" class=\"text-white hover:text-gray-300\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script><script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var6 := `Home`
+		templ_7745c5c3_Var6 := `
+
+                function handleButtonClick(e) {
+                    const searchInput = document.getElementById('search')
+                    const clicked = e.target;
+                    let content = clicked.textContent;
+
+                    if (content === 'Catalog') {
+                        searchInput.setAttribute('hx-get', '/catalog-search');
+                    } else if (content === 'Watch List') {
+                        searchInput.setAttribute('hx-get', '/watch-list-search');
+                    }
+                    htmx.process(searchInput)
+
+                    if (clicked.tagName === 'BUTTON' || clicked.tagName === 'A') {
+                        if (searchInput) {
+                            searchInput.value = '';
+                        }
+                    }
+                }
+                document.addEventListener('click', handleButtonClick);
+            `
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a href=\"#\" hx-get=\"/catalog?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"text-white hover:text-gray-300\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script></head><body class=\"bg-slate-900 text-white\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var7 := `Catalog`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
+		templ_7745c5c3_Err = Navbar().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <a href=\"#\" hx-get=\"/watch-list?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"text-white hover:text-gray-300\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"top\"></div><div class=\"py-4\"></div><div class=\"flex h-fit items-center justify-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var8 := `WatchList`
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
+		templ_7745c5c3_Err = components.Home().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a> <input type=\"text\" name=\"search\" hx-trigger=\"keyup changed delay:500ms\" hx-get=\"/search\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" placeholder=\"Search...\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div></nav><div id=\"top\"></div><div class=\"py-4\"></div><div class=\"flex items-center justify-center\"><div id=\"main-content\"></div></div></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

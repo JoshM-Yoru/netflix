@@ -28,6 +28,7 @@ templ MediaInfo(info models.MediaInfo) {
  				hx-patch={ fmt.Sprintf("catalog?id=%d", info.ID) }
  				hx-target="#main-content"
  				hx-swap="outerHTML"
+ 				hx-confirm="Are You Sure You Want To Delte Record?"
  				class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
 			>Delete</button>
 			<div class="px-2"></div>

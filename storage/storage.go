@@ -12,6 +12,7 @@ import (
 type Storage interface {
 	GetFullCatalog() ([]*models.MediaInfo, error)
 	SearchCatalog(string) ([]*models.MediaInfo, error)
+	SearchWatchList(string) ([]*models.WatchListInfo, error)
 	GetMediaEntryById(int) (*models.MediaInfo, error)
 	GetWatchListEntryById(int) (*models.WatchListInfo, error)
     UpdateMediaInfo(*models.MediaInfo) error
@@ -107,6 +108,28 @@ func (s *PostgresStore) SearchCatalog(title string) ([]*models.MediaInfo, error)
 func (s *PostgresStore) GetWatchList() ([]*models.WatchListInfo, error) {
 
 	rows, err := s.db.Query("select c.type, c.title, c.director, c.country, c.date_added, c.release_year, c.rating, c.duration, c.listed_in, wm.pk_id, wm.watched from catalog c right join watched_media wm on c.pk_id = wm.fk_id")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	watchList := []*models.WatchListInfo{}
+	for rows.Next() {
+		mediaInfo, err := scanIntoWatchListInfo(rows)
+		if err != nil {
+			return nil, err
+		}
+		watchList = append(watchList, mediaInfo)
+	}
+
+	return watchList, nil
+}
+
+func (s *PostgresStore) SearchWatchList(title string) ([]*models.WatchListInfo, error) {
+	searchPattern := fmt.Sprintf("%%%s%%", strings.ToLower(title))
+
+
+	rows, err := s.db.Query("select c.type, c.title, c.director, c.country, c.date_added, c.release_year, c.rating, c.duration, c.listed_in, wm.pk_id, wm.watched from catalog c right join watched_media wm on c.pk_id = wm.fk_id where c.title ilike $1 and c.pk_id = wm.fk_id", searchPattern)
 	if err != nil {
 		return nil, err
 	}

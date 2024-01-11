@@ -33,7 +33,10 @@ func (s *APIServer) Run() {
 	app.GET("/watch-list", s.HandleGetFullWatchlist)
 
 	//searches catalog for a substring
-	app.GET("/search", s.HandleSearch)
+	app.GET("/catalog-search", s.HandleCatalogSearch)
+
+	//searches catalog for a substring
+	app.GET("/watch-list-search", s.HandleWatchListSearch)
 
 	//gets form for new entry
 	app.GET("/new-item", s.HandleNewEntryForm)

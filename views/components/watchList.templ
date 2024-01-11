@@ -33,13 +33,23 @@ templ WatchList(catalog []*models.WatchListInfo, page, pageSize, pages int) {
 			<div class="pr-8"></div>
 			if page > 1 {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">&lt</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 1) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>&lt</button>
 				</a>
 				<div class="pr-8"></div>
 			}
 			if page > 4 {
 				<a href="#top">
-					<button hx-get="/watch-list?page=1" hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">1</button>
+					<button
+ 						hx-get="/watch-list?page=1"
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>1</button>
 				</a>
 				<div class="pr-8"></div>
 				<div>...</div>
@@ -47,29 +57,54 @@ templ WatchList(catalog []*models.WatchListInfo, page, pageSize, pages int) {
 			}
 			if page - 2 > 1 {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 2) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{ fmt.Sprintf("%d", page - 2) }</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 2) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>{ fmt.Sprintf("%d", page - 2) }</button>
 				</a>
 				<div class="pr-8"></div>
 			}
 			if page - 1 > 1 {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{ fmt.Sprintf("%d", page - 1) }</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page - 1) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>{ fmt.Sprintf("%d", page - 1) }</button>
 				</a>
 				<div class="pr-8"></div>
 			}
 			<a href="#top">
-				<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-700">{ fmt.Sprintf("%d", page) }</button>
+				<button
+ 					hx-get={ fmt.Sprintf("/watch-list?page=%d", page) }
+ 					hx-target="#main-content"
+ 					hx-swap="outerHTML"
+ 					class="p-2 rounded-lg bg-slate-700"
+				>{ fmt.Sprintf("%d", page) }</button>
 			</a>
 			<div class="pr-8"></div>
 			if page + 1 < pages - 1 {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{ fmt.Sprintf("%d", page + 1) }</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 1) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>{ fmt.Sprintf("%d", page + 1) }</button>
 				</a>
 				<div class="pr-8"></div>
 			}
 			if page + 2 < pages - 1 {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 2) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{ fmt.Sprintf("%d", page + 2) }</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 2) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>{ fmt.Sprintf("%d", page + 2) }</button>
 				</a>
 				<div class="pr-8"></div>
 			}
@@ -77,13 +112,23 @@ templ WatchList(catalog []*models.WatchListInfo, page, pageSize, pages int) {
 				<div>...</div>
 				<div class="pr-8"></div>
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", pages) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">{ fmt.Sprintf("%d", pages) }</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", pages) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>{ fmt.Sprintf("%d", pages) }</button>
 				</a>
 				<div class="pr-8"></div>
 			}
 			if page + 1 < pages {
 				<a href="#top">
-					<button hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 1) } hx-target="#main-content" hx-swap="outerHTML" class="p-2 rounded-lg bg-slate-950">&gt</button>
+					<button
+ 						hx-get={ fmt.Sprintf("/watch-list?page=%d", page + 1) }
+ 						hx-target="#main-content"
+ 						hx-swap="outerHTML"
+ 						class="p-2 rounded-lg bg-slate-950"
+					>&gt</button>
 				</a>
 			}
 			<div class="pr-8"></div>
