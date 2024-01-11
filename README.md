@@ -9,6 +9,7 @@
 ### Task #2 – Web Server
 
 Develop a web server to interface with the database with the following capabilities
+
     - Can retrieve a list of all movies and shows in the database. [x]
         + Bonus: How might you increase performance of this operation?
     - Can add a new movie or show to the database. [x]
@@ -18,6 +19,7 @@ Develop a web server to interface with the database with the following capabilit
 ### Task #3 – Web App
 
 Develop a web application to communicate with the server that includes the following features
+
     - Allows John to see all movies and shows in a table format. [x]
         + Bonus: How might you add a searching capability to this feature? [x]
     - Allows John to add a new movie or show. [x]
@@ -25,11 +27,12 @@ Develop a web application to communicate with the server that includes the follo
     - Allows John to delete a movie or show. [x]
 
 ## Tools Used
-     [Golang](https://go.dev/) Used for the backend
-     [Templ](https://templ.guide/) HTML templating engine using Golang
-     [Echo](https://echo.labstack.com/) Minimal Web Framework for Go
-     [HTMX](https://htmx.org/) Used to make requests to the backend and swap html elements
-     [Tailwind](https://tailwindcss.com/) Used for styling
+
+     Golang: https://go.dev/ Used for the backend
+     Templ: https://templ.guide/ HTML templating engine using Golang
+     Echo: https://echo.labstack.com/ Minimal Web Framework for Go
+     HTMX: https://htmx.org/ Used to make requests to the backend and swap html elements
+     Tailwind: https://tailwindcss.com/ Used for styling
 
 ### Would Like To Do
     - Implement result caching for faster results
