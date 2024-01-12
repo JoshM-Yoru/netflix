@@ -78,7 +78,6 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		return err
 	}
 
-    // parses request into MediaInfo struct
 	media := models.MediaInfo{
 		Type:        c.FormValue("type"),
 		Title:       c.FormValue("title"),
