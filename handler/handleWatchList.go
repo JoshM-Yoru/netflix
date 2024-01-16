@@ -80,7 +80,7 @@ func (s *APIServer) HandleUpdateWatchListEntry(c echo.Context) error {
 		return err
 	}
 
-	return render(c, components.WatchListMediaInfo(*media))
+	return render(c, components.WatchedToggle(*media))
 }
 
 func (s *APIServer) HandleDeleteWatchlistEntry(c echo.Context) error {

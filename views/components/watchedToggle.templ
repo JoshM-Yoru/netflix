@@ -1,0 +1,26 @@
+package components
+
+import (
+	"netflix/models"
+	"fmt"
+)
+
+templ WatchedToggle(info models.WatchListInfo) {
+	<div class="p-2 text-wrap w-24" id={ fmt.Sprintf("media-%d-watched", info.ID) }>
+		if info.Watched {
+			Yes
+		} else {
+			No
+		}
+	</div>
+	<p
+ 		id={ fmt.Sprintf("media-%d-button", info.ID) }
+ 		hx-swap-oob="true"
+	>
+		if info.Watched {
+			Unwatch
+		} else {
+			Watched
+		}
+	</p>
+}

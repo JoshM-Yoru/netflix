@@ -16,25 +16,23 @@ templ WatchListMediaInfo(info models.WatchListInfo) {
 		<div class="p-2 text-wrap w-10">{ info.Media.Rating }</div>
 		<div class="p-2 text-wrap w-18">{ info.Media.Duration }</div>
 		<div class="p-2 text-wrap w-24">{ info.Media.Category }</div>
-		<div class="p-2 text-wrap w-24">
-			if info.Watched {
-				Yes
-			} else {
-				No
-			}
-		</div>
 		<div class="flex h-fit align-middle my-auto">
+			@WatchedToggle(info)
 			<button
  				hx-put={ fmt.Sprintf("watch-list?id=%d", info.ID) }
- 				hx-target={ fmt.Sprintf("#media-%d", info.ID) }
+ 				hx-target={ fmt.Sprintf("#media-%d-watched", info.ID) }
  				hx-swap="outerHTML"
  				class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
 			>
-				if info.Watched {
-					Unwatch
-				} else {
-					Watched
-				}
+				<p
+ 					id={ fmt.Sprintf("media-%d-button", info.ID) }
+				>
+					if info.Watched {
+						Unwatch
+					} else {
+						Watched
+					}
+				</p>
 			</button>
 			<div class="px-2"></div>
 			<button

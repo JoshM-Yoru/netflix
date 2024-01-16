@@ -66,7 +66,6 @@ func Base() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Var6 := `
-
                 function handleButtonClick(e) {
                     const searchInput = document.getElementById('search')
                     const clicked = e.target;
