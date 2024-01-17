@@ -26,6 +26,7 @@ func NewAPIServer(listenAddress string, store storage.Storage) *APIServer {
 func (s *APIServer) Run() {
 	app := echo.New()
     app.Static("/", "assests")
+    app.Static("/", "styles")
 
     CatalogSearchCache = &SearchCache{
         SearchedTerm: "",

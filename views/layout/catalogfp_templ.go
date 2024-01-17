@@ -28,7 +28,7 @@ func CatalogFP(settings views.CatalogContext) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html class=\"scroll-smooth\"><head><script src=\"https://unpkg.com/htmx.org@1.9.10\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html class=\"scroll-smooth\"><head><script src=\"https://unpkg.com/htmx.org@1.9.10\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -55,20 +55,11 @@ func CatalogFP(settings views.CatalogContext) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script><script src=\"https://cdn.tailwindcss.com\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script><link rel=\"stylesheet\" href=\"templ.css\"><link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\"><script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var5 := ``
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script><script>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Var6 := `
+		templ_7745c5c3_Var5 := `
                 function scrollToTop() {
                     window.scrollTo(0, 0);
                 }
@@ -79,9 +70,9 @@ func CatalogFP(settings views.CatalogContext) templ.Component {
                     let content = clicked.textContent;
 
                     if (content === 'Catalog') {
-                        searchInput.setAttribute('hx-get', '/catalog-search');
+                        searchInput.setAttribute('hx-get', '/catalog?page=1');
                     } else if (content === 'Watch List') {
-                        searchInput.setAttribute('hx-get', '/watch-list-search');
+                        searchInput.setAttribute('hx-get', '/watch-list?page=1');
                     }
                     htmx.process(searchInput)
 
@@ -93,7 +84,7 @@ func CatalogFP(settings views.CatalogContext) templ.Component {
                 }
                 document.addEventListener('click', handleButtonClick);
             `
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

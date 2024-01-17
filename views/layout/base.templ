@@ -3,6 +3,7 @@ package layout
 import "netflix/views/components"
 
 templ Base() {
+	<!DOCTYPE html>
 	<html class="scroll-smooth">
 		<head>
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -10,7 +11,8 @@ templ Base() {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
-			<script src="https://cdn.tailwindcss.com"></script>
+			<link rel="stylesheet" href="templ.css"/>
+			<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 			<script>
                 function scrollToTop() {
                     window.scrollTo(0, 0);

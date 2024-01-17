@@ -1,9 +1,35 @@
 package components
 
-import ()
-
 templ BadRequest() {
-	<div id="main-content" class="w-4/5 justify-self-center block py-4">
-		<h1 class="text-4xl m-auto flex justify-around">Oops</h1>
-	</div>
+	<!DOCTYPE html>
+	<html class="scroll-smooth">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+			<title>Netflix</title>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+			<link rel="stylesheet" href="templ.css"/>
+			<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+		</head>
+		<body class="bg-slate-900 text-white">
+			<div id="top"></div>
+			<div class="py-4"></div>
+			<div class="flex h-fit items-center justify-center">
+				<div id="main-content" class="w-4/5 justify-self-center block py-4">
+					<div class="m-auto block align-middle">
+						<img src="https://media.tenor.com/H9flVOEOAREAAAAi/uh-oh-eric-cartman.gif" alt="Sad Kitten" class="mx-auto"/>
+						<p class="mx-auto text-6xl">404 - Oopsie!</p>
+						<p class="text-2xl">
+							Looks like you're lost. The page you're looking for might have been moved or doesn't
+							exist.
+						</p>
+						<p class="text-2xl">Go back <a href="/"><button
+ 					class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded-md focus:outline-none focus:shadow-outline-red"
+                        >Home</button></a> and try again.</p>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
 }

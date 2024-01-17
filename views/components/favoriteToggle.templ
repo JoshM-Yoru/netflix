@@ -3,18 +3,18 @@ package components
 import "fmt"
 
 templ FavoriteButton(id int, favorited interface{}) {
-    if favorited != nil {
-        <button
-            disabled
-            id={ fmt.Sprintf("media-%d-button", id) }
-            class="h-16 w-28 align-middle bg-green-800 text-white font-semibold py-2 px-4 rounded-md"
-            >Favorited</button>
-    } else {
-        <button
-            hx-post={ fmt.Sprintf("watch-list?id=%d", id) }
-            hx-swap="outerHTML"
-            id={ fmt.Sprintf("media-%d-button", id) }
-            class="h-16 w-28 align-middle bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
-            >Favorite</button>
-    }
+	if favorited != nil {
+		<button
+ 			disabled
+ 			id={ fmt.Sprintf("media-%d-button", id) }
+ 			class="h-16 w-28 align-middle bg-green-800 text-white font-semibold py-2 px-4 rounded-md"
+		>Favorited</button>
+	} else {
+		<button
+ 			hx-post={ fmt.Sprintf("watch-list?id=%d", id) }
+ 			hx-swap="outerHTML"
+ 			id={ fmt.Sprintf("media-%d-button", id) }
+ 			class="h-16 w-28 align-middle bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
+		>Favorite</button>
+	}
 }

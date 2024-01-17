@@ -6,115 +6,115 @@ templ Pagination(page, pages int, route, search string) {
 	<div class="flex justify-end text-xl">
 		<div class="p-2">Pages:</div>
 		<div class="pr-8"></div>
-        if page > 1 { 
-        <button
-            hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 1, search) }
-            hx-target="#main-content"
-            hx-trigger="click delay:0.1s"
-            hx-swap="outerHTML"
-            hx-push-url="true"
-            class="p-2 rounded-lg bg-slate-950"
-            hx-on:click="scrollToTop()"
-        >&lt</button>
+		if page > 1 {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 1, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>&lt</button>
+			<div class="pr-8"></div>
+		}
+		if page - 3 > 1 {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, 1, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", 1) }</button>
+			<div class="pr-8"></div>
+			<div>...</div>
+			<div class="pr-8"></div>
+		}
+		if page - 2 > 0 {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 2, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", page - 2) }</button>
+			<div class="pr-8"></div>
+		}
+		if page - 1 > 0 {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 1, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", page - 1) }</button>
+			<div class="pr-8"></div>
+		}
+		<button
+ 			hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page, search) }
+ 			hx-target="#main-content"
+ 			hx-trigger="click delay:0.1s"
+ 			hx-swap="outerHTML"
+ 			hx-push-url="true"
+ 			class="p-2 rounded-lg bg-slate-700"
+ 			hx-on:click="scrollToTop()"
+		>{ fmt.Sprintf("%d", page) }</button>
 		<div class="pr-8"></div>
-        }
-        if page - 3 > 1 { 
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, 1, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-                >{ fmt.Sprintf("%d", 1) }</button>
-            <div class="pr-8"></div>
-            <div>...</div>
-            <div class="pr-8"></div>
-        }
-        if page - 2 > 0 { 
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 2, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-                >{ fmt.Sprintf("%d", page - 2) }</button>
-            <div class="pr-8"></div>
-        }
-        if page - 1 > 0 { 
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page - 1, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-                >{ fmt.Sprintf("%d", page - 1) }</button>
-            <div class="pr-8"></div>
-        }
-        <button
-            hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page, search) }
-            hx-target="#main-content"
-            hx-trigger="click delay:0.1s"
-            hx-swap="outerHTML"
-            hx-push-url="true"
-            class="p-2 rounded-lg bg-slate-700"
-            hx-on:click="scrollToTop()"
-        >{ fmt.Sprintf("%d", page) }</button>
-		<div class="pr-8"></div>
-        if page + 1 < pages { 
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 1, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-                >{ fmt.Sprintf("%d", page + 1) }</button>
-            <div class="pr-8"></div>
-        }
-        if page + 2 < pages { 
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 2, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-                >{ fmt.Sprintf("%d", page + 2) }</button>
-            <div class="pr-8"></div>
-        }
-        if page != pages && pages != 0 {
-            if page < pages - 3 {
-                <div>...</div>
-                <div class="pr-8"></div>
-            }
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, pages, search) }
-                hx-target="#main-content"
-                hx-trigger="click delay:0.1s"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-                hx-on:click="scrollToTop()"
-            >{ fmt.Sprintf("%d", pages) }</button>
-            <div class="pr-8"></div>
-            <button
-                hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 1, search) }
-                hx-on:click="scrollToTop()"
-                hx-trigger="click delay:0.1s"
-                hx-target="#main-content"
-                hx-swap="outerHTML"
-                hx-push-url="true"
-                class="p-2 rounded-lg bg-slate-950"
-            >&gt</button>
-            <div class="pr-8"></div>
-        }
+		if page + 1 < pages {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 1, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", page + 1) }</button>
+			<div class="pr-8"></div>
+		}
+		if page + 2 < pages {
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 2, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", page + 2) }</button>
+			<div class="pr-8"></div>
+		}
+		if page != pages && pages != 0 {
+			if page < pages - 3 {
+				<div>...</div>
+				<div class="pr-8"></div>
+			}
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, pages, search) }
+ 				hx-target="#main-content"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+ 				hx-on:click="scrollToTop()"
+			>{ fmt.Sprintf("%d", pages) }</button>
+			<div class="pr-8"></div>
+			<button
+ 				hx-get={ fmt.Sprintf("/%s?page=%d%s", route, page + 1, search) }
+ 				hx-on:click="scrollToTop()"
+ 				hx-trigger="click delay:0.1s"
+ 				hx-target="#main-content"
+ 				hx-swap="outerHTML"
+ 				hx-push-url="true"
+ 				class="p-2 rounded-lg bg-slate-950"
+			>&gt</button>
+			<div class="pr-8"></div>
+		}
 	</div>
 }

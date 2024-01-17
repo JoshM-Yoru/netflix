@@ -20,13 +20,8 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		return nil
 	}
 
-	page := c.QueryParam("page")
-	pageNum, err := strconv.Atoi(page)
-	if err != nil {
-		return err
-	}
-
 	var catalog []*models.MediaInfo
+	var err error
 
 	if len(CatalogCache) > 0 {
 		catalog = CatalogCache
@@ -44,6 +39,18 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		pages = len(catalog) / 20
 	} else {
 		pages = int(len(catalog)/20) + 1
+	}
+
+	page := c.QueryParam("page")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+		return render(c, layout.CatalogFP(views.CatalogContext{
+			Catalog:     catalog,
+			Page:        1,
+			PageSize:    20,
+			Pages:       pages,
+			FullPageReq: true,
+		}))
 	}
 
 	// used to make sure that a page that does not exist in the catalog can not be accessed
@@ -144,8 +151,6 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 	if err != nil {
 		return nil
 	}
-
-	fmt.Println("test")
 
 	year, err := strconv.Atoi(c.FormValue("releaseYear"))
 	if err != nil {

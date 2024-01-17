@@ -17,13 +17,6 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
         return nil
     }
 
-	page := c.QueryParam("page")
-	pageNum, err := strconv.Atoi(page)
-	if err != nil {
-		fmt.Println(err)
-		return err
-	}
-
 	watchList, err := s.store.GetWatchList()
 	if err != nil {
 		log.Fatal(err)
@@ -36,6 +29,18 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
     } else {
         pages = int(len(watchList)/20) + 1
     }
+
+	page := c.QueryParam("page")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+        return render(c, layout.WatchListFP(views.WatchListContext{
+        Catalog: watchList,
+        Page: 1,
+        PageSize: 20,
+        Pages: pages,
+            FullPageReq: true,
+        }))
+	}
 
 	if pageNum > pages {
 		return render(c, components.BadRequest())
