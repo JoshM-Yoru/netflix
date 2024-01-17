@@ -2,12 +2,13 @@ package handler
 
 import (
 	"netflix/storage"
+	"netflix/views/components"
 	"netflix/views/layout"
 
 	"github.com/labstack/echo/v4"
 )
 
-// struct holds the port number and 
+// struct holds the port number and
 type APIServer struct {
 	listenAddress string
 	store         storage.Storage
@@ -26,20 +27,20 @@ func (s *APIServer) Run() {
 	app := echo.New()
     app.Static("/", "assests")
 
+    CatalogSearchCache = &SearchCache{
+        SearchedTerm: "",
+    }
+
 	//home
 	app.GET("/", s.HandleHome)
 
 	//gets full catalog
+	//also handles searching catalog title for a substring
 	app.GET("/catalog", s.HandleGetFullCatalog)
 
 	//gets full watch list
+	//also handles searching watch list title for a substring
 	app.GET("/watch-list", s.HandleGetFullWatchlist)
-
-	//searches catalog for a substring
-	// app.GET("/catalog?search", s.HandleCatalogSearch)
-
-	//searches catalog for a substring
-	app.GET("/watch-list-search", s.HandleWatchListSearch)
 
 	//gets form for new entry
 	app.GET("/new-item", s.HandleNewEntryForm)
@@ -70,5 +71,9 @@ func (s *APIServer) Run() {
 
 // returns html for the '/' route
 func (s *APIServer) HandleHome(c echo.Context) error {
-	return render(c, layout.Base())
+	if c.Request().Header.Get("HX-Request") == "true" {
+		return render(c, components.Home())
+	} else {
+		return render(c, layout.Base())
+	}
 }

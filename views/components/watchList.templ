@@ -26,6 +26,6 @@ templ WatchList(settings views.WatchListContext) {
 				<div class="pt-2"></div>
 			}
 		}
-		@Pagination(settings.Page, settings.Pages, "watch-list")
+		@Pagination(settings.Page, settings.Pages, "watch-list", settings.SearchParam)
 	</div>
 }

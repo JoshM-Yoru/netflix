@@ -59,7 +59,7 @@ func Home() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div><div class=\" pb-8\"></div><div class=\"flex w-3/4 justify-center text-2xl m-auto pb-4\"><button hx-get=\"/catalog?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div><div class=\" pb-8\"></div><div class=\"flex w-3/4 justify-center text-2xl m-auto pb-4\"><button hx-get=\"/catalog?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" hx-push-url=\"true\" class=\"bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

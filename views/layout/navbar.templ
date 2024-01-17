@@ -7,7 +7,13 @@ templ Navbar() {
 				<img src="Netflix.png" class="max-h-10"/>
 			</a>
 			<div class="space-x-4 flex items-center">
-				<a href="/" class="text-white hover:text-gray-300">Home</a>
+				<a href="#" 
+ 					href="#"
+ 					hx-get="/"
+ 					hx-target="#main-content"
+ 					hx-swap="outerHTML"
+ 					hx-push-url="true"
+                    class="text-white hover:text-gray-300">Home</a>
 				<a
  					href="#"
  					hx-get="/catalog?page=1"
@@ -28,7 +34,7 @@ templ Navbar() {
  					type="text"
  					name="search"
  					id="search"
- 					hx-get="/catalog"
+ 					hx-get="/catalog?page=1"
  					hx-trigger="keyup changed delay:500ms"
  					hx-target="#main-content"
  					hx-swap="outerHTML"

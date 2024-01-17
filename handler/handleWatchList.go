@@ -12,6 +12,11 @@ import (
 )
 
 func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
+    if len(c.QueryParam("search")) > 0 {
+        s.HandleWatchListSearch(c)
+        return nil
+    }
+
 	page := c.QueryParam("page")
 	pageNum, err := strconv.Atoi(page)
 	if err != nil {
@@ -53,7 +58,9 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
 }
 
 func (s *APIServer) HandleWatchListSearch(c echo.Context) error {
-	watchList, err := s.store.SearchWatchList(c.FormValue("search"))
+	searchedTerm := c.FormValue("search")
+
+	watchList, err := s.store.SearchWatchList(searchedTerm)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -70,10 +77,17 @@ func (s *APIServer) HandleWatchListSearch(c echo.Context) error {
         Catalog: watchList,
         Page: 1,
         PageSize: 20,
+		SearchParam: fmt.Sprintf("&search=%s", searchedTerm),
         Pages: pages,
     }
 
-	return render(c, components.WatchList(ctx))
+    if (c.Request().Header.Get("HX-Request") == "true"){
+        ctx.FullPageReq = false
+        return render(c, components.WatchList(ctx))
+    } else {
+        ctx.FullPageReq = true
+        return render(c, layout.WatchListFP(ctx))
+    }
 }
 
 func (s *APIServer) HandleUpdateWatchList(c echo.Context) error {

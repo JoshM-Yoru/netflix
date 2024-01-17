@@ -15,9 +15,10 @@ import (
 )
 
 func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
-    if len(c.QueryParam("search")) > 0 {
-        s.HandleCatalogSearch(c)
-    }
+	if len(c.QueryParam("search")) > 0 {
+		s.HandleCatalogSearch(c)
+		return nil
+	}
 
 	page := c.QueryParam("page")
 	pageNum, err := strconv.Atoi(page)
@@ -25,17 +26,17 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 		return err
 	}
 
-    var catalog []*models.MediaInfo
+	var catalog []*models.MediaInfo
 
-    if len(CatalogCache) > 0  {
-        catalog = CatalogCache
-    } else {
-        catalog, err = s.store.GetFullCatalog()
-        if err != nil {
-            log.Fatal(err)
-        }
-        CatalogCache = catalog
-    }
+	if len(CatalogCache) > 0 {
+		catalog = CatalogCache
+	} else {
+		catalog, err = s.store.GetFullCatalog()
+		if err != nil {
+			log.Fatal(err)
+		}
+		CatalogCache = catalog
+	}
 
 	var pages int
 
@@ -68,12 +69,28 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 
 func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
 
-	catalog, err := s.store.SearchCatalog(c.FormValue("search"))
-	if err != nil {
-		log.Fatal(err)
+	var catalog []*models.MediaInfo
+	var err error
+	searchedTerm := c.FormValue("search")
+
+	if CatalogSearchCache.SearchedTerm == searchedTerm {
+		CatalogSearchCache.Mu.Lock()
+		catalog = CatalogSearchCache.Records
+	} else {
+		CatalogSearchCache.Mu.Lock()
+		catalog, err = s.store.SearchCatalog(searchedTerm)
+		if err != nil {
+			log.Fatal(err)
+		}
+		CatalogSearchCache.SearchedTerm = searchedTerm
+		CatalogSearchCache.Records = catalog
 	}
 
-    fmt.Println(c.QueryParams())
+	page := c.QueryParam("page")
+	pageNum, err := strconv.Atoi(page)
+	if err != nil {
+		return err
+	}
 
 	var pages int
 
@@ -84,13 +101,22 @@ func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
 	}
 
 	ctx := views.CatalogContext{
-		Catalog:  catalog,
-		Page:     1,
-		PageSize: 20,
-		Pages:    pages,
+		Catalog:     catalog,
+		Page:        pageNum,
+		PageSize:    20,
+		SearchParam: fmt.Sprintf("&search=%s", searchedTerm),
+		Pages:       pages,
 	}
 
-	return render(c, components.Catalog(ctx))
+	CatalogSearchCache.Mu.Unlock()
+
+	if c.Request().Header.Get("HX-Request") == "true" {
+		ctx.FullPageReq = false
+		return render(c, components.Catalog(ctx))
+	} else {
+		ctx.FullPageReq = true
+		return render(c, layout.CatalogFP(ctx))
+	}
 }
 
 func (s *APIServer) HandleNewEntryForm(c echo.Context) error {

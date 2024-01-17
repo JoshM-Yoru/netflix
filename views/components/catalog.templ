@@ -33,6 +33,6 @@ templ Catalog(settings views.CatalogContext) {
 				<div class="pt-2"></div>
 			}
 		}
-		@Pagination(settings.Page, settings.Pages, "catalog")
+		@Pagination(settings.Page, settings.Pages, "catalog", settings.SearchParam)
 	</div>
 }

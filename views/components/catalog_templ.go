@@ -133,7 +133,7 @@ func Catalog(settings views.CatalogContext) templ.Component {
 				}
 			}
 		}
-		templ_7745c5c3_Err = Pagination(settings.Page, settings.Pages, "catalog").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Pagination(settings.Page, settings.Pages, "catalog", settings.SearchParam).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

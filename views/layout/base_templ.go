@@ -76,9 +76,9 @@ func Base() templ.Component {
                     let content = clicked.textContent;
 
                     if (content === 'Catalog') {
-                        searchInput.setAttribute('hx-get', '/catalog-search');
+                        searchInput.setAttribute('hx-get', '/catalog?page=1');
                     } else if (content === 'Watch List') {
-                        searchInput.setAttribute('hx-get', '/watch-list-search');
+                        searchInput.setAttribute('hx-get', '/watch-list?page=1');
                     }
                     htmx.process(searchInput)
 
