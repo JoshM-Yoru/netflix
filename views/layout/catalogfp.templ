@@ -13,34 +13,10 @@ templ CatalogFP(settings views.CatalogContext) {
 			<title>Netflix</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 			<link rel="stylesheet" href="templ.css"/>
 			<link rel="icon" type="image/x-icon" href="favicon.ico"/>
-			<script>
-                function scrollToTop() {
-                    window.scrollTo(0, 0);
-                }
-
-                function handleButtonClick(e) {
-                    const searchInput = document.getElementById('search')
-                    const clicked = e.target;
-                    let content = clicked.textContent;
-
-                    if (content === 'Catalog') {
-                        searchInput.setAttribute('hx-get', '/catalog?page=1');
-                    } else if (content === 'Watch List') {
-                        searchInput.setAttribute('hx-get', '/watch-list?page=1');
-                    }
-                    htmx.process(searchInput)
-
-                    if (clicked.tagName === 'BUTTON' || clicked.tagName === 'A') {
-                        if (searchInput) {
-                            searchInput.value = '';
-                        }
-                    }
-                }
-                document.addEventListener('click', handleButtonClick);
-            </script>
+			<script src="index.js" />
+			<script src="htmx.min.js" />
 		</head>
 		<body class="bg-slate-900 text-white">
 			@Navbar()

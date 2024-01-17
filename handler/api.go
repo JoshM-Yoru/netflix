@@ -27,6 +27,7 @@ func (s *APIServer) Run() {
 	app := echo.New()
     app.Static("/", "assests")
     app.Static("/", "styles")
+    app.Static("/", "scripts")
 
     CatalogSearchCache = &SearchCache{
         SearchedTerm: "",
