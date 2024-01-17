@@ -25,13 +25,13 @@ func NewAPIServer(listenAddress string, store storage.Storage) *APIServer {
 // function used to run the server that includes all necessary endpoints
 func (s *APIServer) Run() {
 	app := echo.New()
-    app.Static("/", "assests")
-    app.Static("/scripts", "scripts")
-    app.Static("/styles", "styles")
+	app.Static("/assets", "assets")
+	app.Static("/scripts", "scripts")
+	app.Static("/styles", "styles")
 
-    CatalogSearchCache = &SearchCache{
-        SearchedTerm: "",
-    }
+	CatalogSearchCache = &SearchCache{
+		SearchedTerm: "",
+	}
 
 	//home
 	app.GET("/", s.HandleHome)
@@ -78,4 +78,8 @@ func (s *APIServer) HandleHome(c echo.Context) error {
 	} else {
 		return render(c, layout.Base())
 	}
+}
+
+func (s *APIServer) HandleBadPage(c echo.Context) error {
+	return render(c, components.BadRequest())
 }

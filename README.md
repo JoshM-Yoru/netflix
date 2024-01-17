@@ -39,6 +39,8 @@
 - ~Implement proper handling of HX-Request and HX-Current-URL headers to build the proper route rather than defaulting to '/' on page refresh~
 - ~Implement a Tailwind build step to send necessary attributes to the client rather than using a cdn~
 - ~Import htmx doc to use locally rather than using cdn~
+- Add a way to clear the cache after 'x' amount of time
+- Implement user functionality so different people can log in and have their own list of favorited stuff
 
 ### Bugs
 - ~Defaults to '/' on refresh~

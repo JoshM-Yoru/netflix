@@ -68,10 +68,10 @@ func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
 	if c.Request().Header.Get("HX-Request") == "true" {
 		ctx.FullPageReq = false
 		return render(c, components.Catalog(ctx))
-	} else {
-		ctx.FullPageReq = true
-		return render(c, layout.CatalogFP(ctx))
 	}
+
+	ctx.FullPageReq = true
+	return render(c, layout.CatalogFP(ctx))
 }
 
 func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
@@ -120,10 +120,10 @@ func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
 	if c.Request().Header.Get("HX-Request") == "true" {
 		ctx.FullPageReq = false
 		return render(c, components.Catalog(ctx))
-	} else {
-		ctx.FullPageReq = true
-		return render(c, layout.CatalogFP(ctx))
 	}
+
+	ctx.FullPageReq = true
+	return render(c, layout.CatalogFP(ctx))
 }
 
 func (s *APIServer) HandleNewEntryForm(c echo.Context) error {
