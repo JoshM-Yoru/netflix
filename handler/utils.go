@@ -2,7 +2,7 @@ package handler
 
 import (
 	"netflix/models"
-	"time"
+	"sync"
 
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
@@ -15,9 +15,11 @@ func render(c echo.Context, component templ.Component) error {
 
 // cache functionality is currently unused
 type SearchCache struct {
-    records []*models.MediaInfo
-    searchedTerm string
-    expires time.Time
+    Records []*models.MediaInfo
+    SearchedTerm string
+    Mu sync.Mutex
 }
 
+var CatalogCache []*models.MediaInfo
 var CatalogSearchCache *SearchCache
+

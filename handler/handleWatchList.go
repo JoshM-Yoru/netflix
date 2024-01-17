@@ -3,7 +3,9 @@ package handler
 import (
 	"fmt"
 	"log"
+    "netflix/views"
 	"netflix/views/components"
+	"netflix/views/layout"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -22,12 +24,32 @@ func (s *APIServer) HandleGetFullWatchlist(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(watchList)/20) + 1
+    var pages int
+
+    if len(watchList) % 20 == 0 {
+        pages = len(watchList)/20
+    } else {
+        pages = int(len(watchList)/20) + 1
+    }
+
 	if pageNum > pages {
 		return render(c, components.BadRequest())
 	}
 
-	return render(c, components.WatchList(watchList, pageNum, 20, pages))
+    ctx := views.WatchListContext {
+        Catalog: watchList,
+        Page: pageNum,
+        PageSize: 20,
+        Pages: pages,
+    }
+
+    if (c.Request().Header.Get("HX-Request") == "true"){
+        ctx.FullPageReq = false
+        return render(c, components.WatchList(ctx))
+    } else {
+        ctx.FullPageReq = true
+        return render(c, layout.WatchListFP(ctx))
+    }
 }
 
 func (s *APIServer) HandleWatchListSearch(c echo.Context) error {
@@ -36,9 +58,22 @@ func (s *APIServer) HandleWatchListSearch(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(watchList)/20) + 1
+    var pages int
 
-	return render(c, components.WatchList(watchList, 1, 20, pages))
+    if len(watchList) % 20 == 0 {
+        pages = len(watchList)/20
+    } else {
+        pages = int(len(watchList)/20) + 1
+    }
+
+    ctx := views.WatchListContext {
+        Catalog: watchList,
+        Page: 1,
+        PageSize: 20,
+        Pages: pages,
+    }
+
+	return render(c, components.WatchList(ctx))
 }
 
 func (s *APIServer) HandleUpdateWatchList(c echo.Context) error {
@@ -53,14 +88,13 @@ func (s *APIServer) HandleUpdateWatchList(c echo.Context) error {
 		return err
 	}
 
-	watchList, err := s.store.GetWatchList()
+	media, err := s.store.GetWatchListEntryByFKId(idNum)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
-	pages := int(len(watchList)/20) + 1
 
-	return render(c, components.WatchList(watchList, 1, 20, pages))
+	return render(c, components.FavoriteButton(media.Media.ID, media.ID))
 }
 
 func (s *APIServer) HandleUpdateWatchListEntry(c echo.Context) error {
@@ -100,7 +134,20 @@ func (s *APIServer) HandleDeleteWatchlistEntry(c echo.Context) error {
 		return err
 	}
 
-	pages := int(len(watchList)/20) + 1
+    var pages int
 
-	return render(c, components.WatchList(watchList, 1, 20, pages))
+    if len(watchList) % 20 == 0 {
+        pages = len(watchList)/20
+    } else {
+        pages = int(len(watchList)/20) + 1
+    }
+
+    ctx := views.WatchListContext {
+        Catalog: watchList,
+        Page: 1,
+        PageSize: 20,
+        Pages: pages,
+    }
+
+	return render(c, components.WatchList(ctx))
 }

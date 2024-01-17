@@ -36,7 +36,7 @@ func (s *APIServer) Run() {
 	app.GET("/watch-list", s.HandleGetFullWatchlist)
 
 	//searches catalog for a substring
-	app.GET("/catalog-search", s.HandleCatalogSearch)
+	// app.GET("/catalog?search", s.HandleCatalogSearch)
 
 	//searches catalog for a substring
 	app.GET("/watch-list-search", s.HandleWatchListSearch)

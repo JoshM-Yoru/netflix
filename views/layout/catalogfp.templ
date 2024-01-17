@@ -1,8 +1,11 @@
 package layout
 
-import "netflix/views/components"
+import (
+	"netflix/views/components"
+	"netflix/views"
+)
 
-templ Base() {
+templ CatalogFP(settings views.CatalogContext) {
 	<html class="scroll-smooth">
 		<head>
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
@@ -42,7 +45,7 @@ templ Base() {
 			<div id="top"></div>
 			<div class="py-4"></div>
 			<div class="flex h-fit items-center justify-center">
-				@components.Home()
+				@components.Catalog(settings)
 			</div>
 		</body>
 	</html>

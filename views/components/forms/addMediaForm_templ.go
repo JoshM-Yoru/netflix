@@ -23,7 +23,7 @@ func AddMediaInfoForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll\"><div class=\"flex justify-around py-2\"><div><label for=\"type\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-post=\"/catalog\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll\"><div class=\"flex justify-around py-2\"><div><label for=\"type\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -32,7 +32,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"type\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"title\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"type\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"title\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -41,7 +41,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"title\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"director\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"title\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"director\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -50,7 +50,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"director\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"flex justify-around py-2\"><div><label for=\"country\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"director\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"flex justify-around py-2\"><div><label for=\"country\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -59,7 +59,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"country\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"dateAdded\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"country\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"dateAdded\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -68,7 +68,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"dateAdded\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\" placeholder=\"YYYY-MM-DD\"></div><div><label for=\"releaseYear\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"dateAdded\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\" placeholder=\"YYYY-MM-DD\"></div><div><label for=\"releaseYear\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -77,7 +77,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"releaseYear\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"flex justify-around py-2\"><div><label for=\"rating\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"releaseYear\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"flex justify-around py-2\"><div><label for=\"rating\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -86,7 +86,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"rating\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"Duration\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"rating\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"Duration\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -95,7 +95,7 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"duration\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"category\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"duration\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div><div><label for=\"category\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -104,12 +104,21 @@ func AddMediaInfoForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input name=\"category\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"px-2\"></div><div class=\"flex justify-around\"><button hx-post=\"/catalog\" hx-target=\"#main-content\" type=\"submit\" hx-swap=\"outerHTML\" class=\"bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</label><br><input required name=\"category\" class=\"px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500\"></div></div><div class=\"px-2\"></div><div class=\"flex\"><button type=\"submit\" class=\"ml-auto bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Var11 := `Submit`
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button><div class=\"px-2\"></div><button hx-get=\"/catalog?page=1\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" class=\"mr-auto bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var12 := `Cancel`
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

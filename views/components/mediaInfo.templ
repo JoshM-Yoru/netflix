@@ -16,7 +16,7 @@ templ MediaInfo(info models.MediaInfo) {
 		<div class="p-2 text-wrap w-10">{ info.Rating }</div>
 		<div class="p-2 text-wrap w-18">{ info.Duration }</div>
 		<div class="p-2 text-wrap w-24">{ info.Category }</div>
-		<div class="flex h-fit align-middle my-auto">
+		<div class="flex h-fit align-left my-auto">
 			<button
  				hx-get={ fmt.Sprintf("update-item?id=%d", info.ID) }
  				hx-target={ fmt.Sprintf("#media-%d", info.ID) }
@@ -32,12 +32,7 @@ templ MediaInfo(info models.MediaInfo) {
  				class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
 			>Delete</button>
 			<div class="px-2"></div>
-			<button
- 				hx-post={ fmt.Sprintf("watch-list?id=%d", info.ID) }
- 				hx-target="#main-content"
- 				hx-swap="outerHTML"
- 				class="h-16 align-middle bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
-			>Favorite</button>
+            @FavoriteButton(info.ID, info.Favorited)
 			<div class="px-2"></div>
 		</div>
 	</div>

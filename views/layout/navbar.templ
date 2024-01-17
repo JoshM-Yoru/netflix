@@ -13,6 +13,7 @@ templ Navbar() {
  					hx-get="/catalog?page=1"
  					hx-target="#main-content"
  					hx-swap="outerHTML"
+ 					hx-push-url="true"
  					class="text-white hover:text-gray-300"
 				>Catalog</a>
 				<a
@@ -20,16 +21,18 @@ templ Navbar() {
  					hx-get="/watch-list?page=1"
  					hx-target="#main-content"
  					hx-swap="outerHTML"
+ 					hx-push-url="true"
  					class="text-white hover:text-gray-300"
 				>Watch List</a>
 				<input
  					type="text"
  					name="search"
  					id="search"
- 					hx-get="/catalog-search"
+ 					hx-get="/catalog"
  					hx-trigger="keyup changed delay:500ms"
  					hx-target="#main-content"
  					hx-swap="outerHTML"
+ 					hx-push-url="true"
  					placeholder="Search..."
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>

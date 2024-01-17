@@ -16,6 +16,7 @@ type MediaInfo struct {
 	Duration    string
 	Category    string
 	is_deleted  bool
+	Favorited   interface{}
 }
 
 // struct that represents the watched_media table

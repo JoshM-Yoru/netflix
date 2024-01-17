@@ -13,7 +13,11 @@ templ WatchedToggle(info models.WatchListInfo) {
 			No
 		}
 	</div>
-	<p
+	<button
+ 		hx-put={ fmt.Sprintf("watch-list?id=%d", info.ID) }
+ 		hx-target={ fmt.Sprintf("#media-%d-watched", info.ID) }
+ 		hx-swap="outerHTML"
+ 		class="h-16 bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
  		id={ fmt.Sprintf("media-%d-button", info.ID) }
  		hx-swap-oob="true"
 	>
@@ -22,5 +26,5 @@ templ WatchedToggle(info models.WatchListInfo) {
 		} else {
 			Watched
 		}
-	</p>
+	</button>
 }

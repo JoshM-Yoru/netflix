@@ -16,6 +16,7 @@ type Storage interface {
 	SearchWatchList(string) ([]*models.WatchListInfo, error)
 	GetMediaEntryById(int) (*models.MediaInfo, error)
 	GetWatchListEntryById(int) (*models.WatchListInfo, error)
+	GetWatchListEntryByFKId(int) (*models.WatchListInfo, error)
 	UpdateMediaInfo(*models.MediaInfo) error
 	CreateMediaEntry(*models.MediaInfo) error
 	DisableMediaEntry(int) error
@@ -74,8 +75,10 @@ func (s *PostgresStore) createWatchedMediaTable() error {
 func (s *PostgresStore) GetFullCatalog() ([]*models.MediaInfo, error) {
 
 	rows, err := s.db.Query(`
-        select pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in 
-        from catalog 
+        select c.pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in, wm.pk_id
+        from catalog c
+        left join watched_media wm
+        on c.pk_id = wm.fk_id
         where is_deleted = false 
         order by title asc
         `)
@@ -100,8 +103,10 @@ func (s *PostgresStore) SearchCatalog(title string) ([]*models.MediaInfo, error)
 	searchPattern := fmt.Sprintf("%%%s%%", strings.ToLower(title))
 
 	rows, err := s.db.Query(`
-        select pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in 
-        from catalog 
+        select c.pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in, wm.pk_id 
+        from catalog c
+        left join watched_media wm
+        on c.pk_id = wm.fk_id
         where is_deleted = false and title ilike $1 
         order by title asc`, searchPattern)
 	if err != nil {
@@ -202,6 +207,28 @@ func (s *PostgresStore) GetWatchListEntryById(id int) (*models.WatchListInfo, er
         right join watched_media wm 
         on c.pk_id = wm.fk_id 
         where wm.pk_id = $1`, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	rows.Next()
+
+	mediaInfo, err := scanIntoWatchListInfo(rows)
+	if err != nil {
+		return nil, err
+	}
+
+	return mediaInfo, nil
+}
+
+func (s *PostgresStore) GetWatchListEntryByFKId(id int) (*models.WatchListInfo, error) {
+
+	rows, err := s.db.Query(`
+        select c.type, c.title, c.director, c.country, c.date_added, c.release_year, c.rating, c.duration, c.listed_in, wm.pk_id, wm.watched 
+        from catalog c 
+        right join watched_media wm 
+        on c.pk_id = wm.fk_id 
+        where wm.fk_id = $1`, id)
 	if err != nil {
 		return nil, err
 	}
@@ -349,6 +376,7 @@ func scanIntoMediaInfo(rows *sql.Rows) (*models.MediaInfo, error) {
 		&media.Rating,
 		&media.Duration,
 		&media.Category,
+        &media.Favorited,
 	)
 
 	return media, err

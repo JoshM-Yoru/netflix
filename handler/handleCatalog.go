@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"log"
 	"netflix/models"
+	"netflix/views"
 	"netflix/views/components"
 	"netflix/views/components/forms"
+	"netflix/views/layout"
 	"strconv"
 	"time"
 
@@ -13,26 +15,55 @@ import (
 )
 
 func (s *APIServer) HandleGetFullCatalog(c echo.Context) error {
+    if len(c.QueryParam("search")) > 0 {
+        s.HandleCatalogSearch(c)
+    }
+
 	page := c.QueryParam("page")
 	pageNum, err := strconv.Atoi(page)
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 
-	catalog, err := s.store.GetFullCatalog()
-	if err != nil {
-		log.Fatal(err)
+    var catalog []*models.MediaInfo
+
+    if len(CatalogCache) > 0  {
+        catalog = CatalogCache
+    } else {
+        catalog, err = s.store.GetFullCatalog()
+        if err != nil {
+            log.Fatal(err)
+        }
+        CatalogCache = catalog
+    }
+
+	var pages int
+
+	if len(catalog)%20 == 0 {
+		pages = len(catalog) / 20
+	} else {
+		pages = int(len(catalog)/20) + 1
 	}
 
-	pages := int(len(catalog)/20) + 1
-
-    // used to make sure that a page that does not exist in the catalog can not be accessed
+	// used to make sure that a page that does not exist in the catalog can not be accessed
 	if pageNum > pages {
 		return render(c, components.BadRequest())
 	}
 
-	return render(c, components.Catalog(catalog, pageNum, 20, pages))
+	ctx := views.CatalogContext{
+		Catalog:  catalog,
+		Page:     pageNum,
+		PageSize: 20,
+		Pages:    pages,
+	}
+
+	if c.Request().Header.Get("HX-Request") == "true" {
+		ctx.FullPageReq = false
+		return render(c, components.Catalog(ctx))
+	} else {
+		ctx.FullPageReq = true
+		return render(c, layout.CatalogFP(ctx))
+	}
 }
 
 func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
@@ -42,9 +73,24 @@ func (s *APIServer) HandleCatalogSearch(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog)/20) + 1
+    fmt.Println(c.QueryParams())
 
-	return render(c, components.Catalog(catalog, 1, 20, pages))
+	var pages int
+
+	if len(catalog)%20 == 0 {
+		pages = len(catalog) / 20
+	} else {
+		pages = int(len(catalog)/20) + 1
+	}
+
+	ctx := views.CatalogContext{
+		Catalog:  catalog,
+		Page:     1,
+		PageSize: 20,
+		Pages:    pages,
+	}
+
+	return render(c, components.Catalog(ctx))
 }
 
 func (s *APIServer) HandleNewEntryForm(c echo.Context) error {
@@ -73,6 +119,8 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		return nil
 	}
 
+	fmt.Println("test")
+
 	year, err := strconv.Atoi(c.FormValue("releaseYear"))
 	if err != nil {
 		return err
@@ -100,9 +148,22 @@ func (s *APIServer) HandleUpdateCatalog(c echo.Context) error {
 		log.Fatal(err)
 	}
 
-	pages := int(len(catalog)/20) + 1
+	var pages int
 
-	return render(c, components.Catalog(catalog, 1, 20, pages))
+	if len(catalog)%20 == 0 {
+		pages = len(catalog) / 20
+	} else {
+		pages = int(len(catalog)/20) + 1
+	}
+
+	ctx := views.CatalogContext{
+		Catalog:  catalog,
+		Page:     1,
+		PageSize: 20,
+		Pages:    pages,
+	}
+
+	return render(c, components.Catalog(ctx))
 }
 
 func (s *APIServer) HandleUpdateCatalogEntry(c echo.Context) error {
@@ -159,6 +220,20 @@ func (s *APIServer) HandleDisableCatalogEntry(c echo.Context) error {
 		return err
 	}
 
-	pages := int(len(catalog)/20) + 1
-	return render(c, components.Catalog(catalog, 1, 20, pages))
+	var pages int
+
+	if len(catalog)%20 == 0 {
+		pages = len(catalog) / 20
+	} else {
+		pages = int(len(catalog)/20) + 1
+	}
+
+	ctx := views.CatalogContext{
+		Catalog:  catalog,
+		Page:     1,
+		PageSize: 20,
+		Pages:    pages,
+	}
+
+	return render(c, components.Catalog(ctx))
 }

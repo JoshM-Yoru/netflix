@@ -1,12 +1,17 @@
 package forms
 
 templ AddMediaInfoForm() {
-	<form class="align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll">
+	<form 
+        hx-post="/catalog"
+        hx-target="#main-content"
+        hx-swap="outerHTML"
+        class="align-middle p-2 bg-slate-950 rounded-lg shadow-lg overflow-scroll">
 		<div class="flex justify-around py-2">
 			<div>
 				<label for="type">Media Type:</label>
 				<br/>
 				<input
+                    required
  					name="type"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -15,6 +20,7 @@ templ AddMediaInfoForm() {
 				<label for="title">Title:</label>
 				<br/>
 				<input
+                    required
  					name="title"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -23,6 +29,7 @@ templ AddMediaInfoForm() {
 				<label for="director">Director:</label>
 				<br/>
 				<input
+                    required
  					name="director"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -33,6 +40,7 @@ templ AddMediaInfoForm() {
 				<label for="country">Country:</label>
 				<br/>
 				<input
+                    required
  					name="country"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -41,6 +49,7 @@ templ AddMediaInfoForm() {
 				<label for="dateAdded">Date Added:</label>
 				<br/>
 				<input
+                    required
  					name="dateAdded"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
  					placeholder="YYYY-MM-DD"
@@ -50,6 +59,7 @@ templ AddMediaInfoForm() {
 				<label for="releaseYear">Release Year:</label>
 				<br/>
 				<input
+                    required
  					name="releaseYear"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -60,6 +70,7 @@ templ AddMediaInfoForm() {
 				<label for="rating">Rating:</label>
 				<br/>
 				<input
+                    required
  					name="rating"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -68,6 +79,7 @@ templ AddMediaInfoForm() {
 				<label for="Duration">Duration:</label>
 				<br/>
 				<input
+                    required
  					name="duration"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
@@ -76,20 +88,25 @@ templ AddMediaInfoForm() {
 				<label for="category">Category:</label>
 				<br/>
 				<input
+                    required
  					name="category"
  					class="px-2 py-1 border rounded-md text-black focus:outline-none focus:border-blue-500"
 				/>
 			</div>
 		</div>
 		<div class="px-2"></div>
-		<div class="flex justify-around">
-			<button
- 				hx-post="/catalog"
- 				hx-target="#main-content"
- 				type="submit"
- 				hx-swap="outerHTML"
- 				class="bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
-			>Submit</button>
-		</div>
+            <div class="flex">
+                <button
+                    type="submit"
+                    class="ml-auto bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
+                >Submit</button>
+                <div class="px-2"></div>
+                <button
+                    hx-get="/catalog?page=1"
+                    hx-target="#main-content"
+                    hx-swap="outerHTML"
+                    class="mr-auto bg-red-800 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-red"
+                >Cancel</button>
+            </div>
 	</form>
 }
