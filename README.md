@@ -37,7 +37,8 @@
 ### Would Like To Do
 - ~Implement result caching for faster results~
 - ~Implement proper handling of HX-Request and HX-Current-URL headers to build the proper route rather than defaulting to '/' on page refresh~
-- Implement a Tailwind build step to send necessary attributes to the client rather than using a cdn
+- ~Implement a Tailwind build step to send necessary attributes to the client rather than using a cdn~
+- Import htmx doc to use locally rather than using cdn
 
 ### Bugs
 - ~Defaults to '/' on refresh~
