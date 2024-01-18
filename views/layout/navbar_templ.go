@@ -23,7 +23,7 @@ func Navbar() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"bg-slate-950 p-4 sticky top-0\"><div class=\"container mx-auto flex justify-between items-center\"><a href=\"/\" class=\"text-white text-lg font-semibold\"><img src=\"/assets/Netflix.png\" class=\"max-h-10\"></a><div class=\"space-x-4 flex items-center\"><a href=\"#\" href=\"#\" hx-get=\"/\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" hx-push-url=\"true\" class=\"text-white hover:text-gray-300\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"bg-slate-950 p-4 sticky top-0\"><div class=\"container mx-auto flex justify-between items-center\"><a href=\"/\" class=\"text-white text-lg font-semibold\"><img src=\"/assets/Netflix.webp\" alt=\"Netflix Logo\" class=\"max-h-10\"></a><div class=\"space-x-4 flex items-center\"><a href=\"#\" href=\"#\" hx-get=\"/\" hx-target=\"#main-content\" hx-swap=\"outerHTML\" hx-push-url=\"true\" class=\"text-white hover:text-gray-300\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
