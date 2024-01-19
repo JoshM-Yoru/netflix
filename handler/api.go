@@ -1,11 +1,13 @@
 package handler
 
 import (
+	"net/http"
 	"netflix/storage"
 	"netflix/views/components"
 	"netflix/views/layout"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 // struct holds the port number and
@@ -32,6 +34,18 @@ func (s *APIServer) Run() {
 	CatalogSearchCache = &SearchCache{
 		SearchedTerm: "",
 	}
+
+    app.Pre(middleware.RemoveTrailingSlash())
+	app.Use(middleware.Secure())
+	app.Use(middleware.CORS())
+	app.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+		TokenLookup:    "cookie:_csrf",
+		CookiePath:     "/",
+		CookieDomain:   "localhost",
+		CookieSecure:   true,
+		CookieHTTPOnly: true,
+		CookieSameSite: http.SameSiteStrictMode,
+	}))
 
 	//home
 	app.GET("/", s.HandleHome)
