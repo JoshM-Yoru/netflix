@@ -182,9 +182,11 @@ func (s *PostgresStore) SearchWatchList(title string) ([]*models.WatchListInfo, 
 func (s *PostgresStore) GetMediaEntryById(id int) (*models.MediaInfo, error) {
 
 	rows, err := s.db.Query(`
-        select pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in 
-        from catalog 
-        where is_deleted = false and pk_id = $1`, id)
+        select c.pk_id, type, title, director, country, date_added, release_year, rating, duration, listed_in, wm.pk_id
+        from catalog c
+        left join watched_media wm
+        on c.pk_id = wm.fk_id
+        where is_deleted = false and c.pk_id = $1`, id)
 	if err != nil {
 		return nil, err
 	}
